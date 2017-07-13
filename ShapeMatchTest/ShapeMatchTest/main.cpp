@@ -39,7 +39,7 @@ void DrawContours(IplImage* source, CvPoint* Contours, int ContoursSize, CvScala
 int _tmain(int argc, _TCHAR* argv[])
 {
 	CShapeMatch SM;
-	IplImage* templateImage = cvLoadImage("..\\TestImage\\Train.bmp", -1 );
+	IplImage* templateImage = cvLoadImage("..\\TestImage\\M.bmp", -1 );
 	if (!templateImage)
 	{
 		cout<< " 图片加载失败！\n";
@@ -65,13 +65,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	/* Set model parameter */
 	shape_model ModelID;
-	ModelID.m_AngleStart		=  0;										//起始角度
-	ModelID.m_AngleStop  	= 0;										//终止角度
+	ModelID.m_AngleStart	=  -10;										//起始角度
+	ModelID.m_AngleStop  	= 10;										//终止角度
 	ModelID.m_AngleStep		= 1;										//角度步长
-	ModelID.m_Contrast			= 80;									//高阈值
-	ModelID.m_MinContrast	= 30;									//低阈值
-	ModelID.m_NumLevels		= 3;										//金字塔级数
-	ModelID.m_Granularity     = 1;									    //颗粒度
+	ModelID.m_Contrast		= 80;										//高阈值
+	ModelID.m_MinContrast	= 30;										//低阈值
+	ModelID.m_NumLevels		= 1;										//金字塔级数
+	ModelID.m_Granularity   = 1;									    //颗粒度
 	ModelID.m_ImageWidth   = grayTemplateImg->width;
 	ModelID.m_ImageHeight  = grayTemplateImg->height;
 
@@ -82,7 +82,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	DrawContours(templateImage, EdgeList.EdgePiont, EdgeList.ListSize , CV_RGB( 255, 0, 0 ),1);
 	cvNamedWindow("Template",CV_WINDOW_AUTOSIZE );
 	cvShowImage("Template",templateImage);
-
+	//cvWaitKey( 0 );
 	SM.initial_shape_model(&ModelID, grayTemplateImg->width, grayTemplateImg->height, EdgeList.ListSize);
 	free(EdgeList.EdgePiont);
 
@@ -100,7 +100,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<" Create Time = "<<total_time*1000<<"ms\n";
 
 	/* Search  model */
-	IplImage* searchImage = cvLoadImage("..\\TestImage\\a.bmp", -1 );
+	IplImage* searchImage = cvLoadImage("..\\TestImage\\S.bmp", -1 );
 	if (!searchImage)
 	{
 		cout<< " 图片加载失败！\n";
@@ -119,8 +119,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	/* Set match parameter */
-	int NumMatch		= 4;				//匹配个数
-	float MinScore     = 0.7f;			//最小评分
+	int NumMatch	   = 1;				//匹配个数
+	float MinScore     = 0.1f;			//最小评分
 	float Greediness   = 0.7f;			//贪婪度
 
 	MatchResultA Result[10];

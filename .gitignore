@@ -44,3 +44,7 @@ ShapeMatchTest/ShapeMatchTest/Release/
 ShapeMatchTest/ShapeMatchTest/Debug/
 ShapeMatchTest/SaveImage/
 *.lastcodeanalysissucceeded
+*.suo
+*.db
+ShapeMatchDll/TestForm/bin/Release/
+ShapeMatchDll/TestForm/obj/

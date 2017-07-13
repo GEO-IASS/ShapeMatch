@@ -1,0 +1,11 @@
+LIBRARY       "ShapeMatchDll"
+;DESCRIPTION   'ShapeMatchDll Dynamic Link Library'
+
+EXPORTS
+     ; Explicit exports can go here
+
+	 TrainShapeModel
+	 CreateShapeModel
+	 FindShapeModel
+	 ReleaseShapeModel
+	 GenRectangle

@@ -318,7 +318,8 @@ void CShapeMatch::initial_shape_model(shape_model *ModelID, int Width, int Heigh
 		{
 			/* Initial pyd3 image model list */
 			Width = Height =  Length >> 3;
-			int ShapeSize = EdgeSize >> 2;
+			//int ShapeSize = EdgeSize >> 2;
+			int ShapeSize = Width * Height;
 			AngleStep = ModelID->m_AngleStep << 3;
 
 			if (ModelID->m_pShapeInfoPyd3Vec != NULL)
@@ -391,7 +392,8 @@ void CShapeMatch::initial_shape_model(shape_model *ModelID, int Width, int Heigh
 
 			/* Initial pyd2 image model list */
 			Width = Height =  Length >> 2;
-			ShapeSize = EdgeSize >> 1;
+			//ShapeSize = EdgeSize >> 1;
+			ShapeSize = Width * Height;
 			AngleStep = ModelID->m_AngleStep << 2;
 
 			if (ModelID->m_pShapeInfoPyd2Vec != NULL)
@@ -465,7 +467,8 @@ void CShapeMatch::initial_shape_model(shape_model *ModelID, int Width, int Heigh
 
 			/* Initial pyd1 image model list */
 			Width = Height =  Length >> 1;
-			ShapeSize = EdgeSize;
+			//ShapeSize = EdgeSize;
+			ShapeSize = Width * Height;
 			AngleStep = ModelID->m_AngleStep << 1;
 
 			if (ModelID->m_pShapeInfoPyd1Vec != NULL)
@@ -2374,9 +2377,11 @@ void CShapeMatch::find_shape_model(IplImage *Image, shape_model *ModelID, float 
 					SearchRegion->EndY   = SearchRegion->StartY + 4;
 
 					SearchRegion->AngleRange = ModelID->m_pShapeInfoTmpVec[0].AngleNum;
-					SearchRegion->AngleStart   = ((MatchAngle - OffSet) < ModelID->m_AngleStart) ?  ModelID->m_AngleStart : (MatchAngle - 2);
-					SearchRegion->AngleStop   = ((MatchAngle + OffSet) > ModelID->m_AngleStop) ?  ModelID->m_AngleStop : (MatchAngle + 2);
-					SearchRegion->AngleStep   = ModelID->m_AngleStep;
+					//SearchRegion->AngleStart = ((MatchAngle - OffSet) < ModelID->m_AngleStart) ?  ModelID->m_AngleStart : (MatchAngle - 2);
+					//SearchRegion->AngleStop  = ((MatchAngle + OffSet) > ModelID->m_AngleStop) ?  ModelID->m_AngleStop : (MatchAngle + 2);
+					SearchRegion->AngleStart = ModelID->m_AngleStart;
+					SearchRegion->AngleStop  = ModelID->m_AngleStop;
+					SearchRegion->AngleStep  = ModelID->m_AngleStep;
 
 					/* Find shape model in source image */
 					if(ModelID->m_pShapeInfoTmpVec == NULL)
